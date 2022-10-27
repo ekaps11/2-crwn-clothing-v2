@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import FormInput from '../form-input/form-input.component';
+import Button from '../button/button.component';
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  signOutUser,
 } from '../../utils/firebase/firebase.utils';
-import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
-import './sign-up-form.styles.scss';
+import { SignContainer } from '../sign-in-form/signing-form.styles';
 
 const defaultFromFields = {
   displayName: '',
@@ -35,8 +36,9 @@ const SignUpForm = () => {
         password
       );
 
-      await createUserDocumentFromAuth(user, { displayName });
       setFormField(defaultFromFields);
+      signOutUser();
+      await createUserDocumentFromAuth(user, { displayName });
       alert('Success creating a new user');
     } catch (err) {
       err.code === 'auth/email-already-in-use'
@@ -46,7 +48,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignContainer>
       <h2>I do not have a account</h2>
       <span>Sign up with your email and password</span>
 
@@ -89,7 +91,7 @@ const SignUpForm = () => {
 
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignContainer>
   );
 };
 

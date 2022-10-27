@@ -1,12 +1,11 @@
 import { useState } from 'react';
+import FormInput from '../form-input/form-input.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.utils';
-import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
-import './sign-in-form.styles.scss';
+import { SignContainer, ButtonContainer } from './signing-form.styles';
 
 const defaultFromFields = {
   email: '',
@@ -19,8 +18,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocumentFromAuth(user);
+      await signInWithGooglePopup();
     } catch (err) {
       if (err.code === 'auth/popup-closed-by-user') return;
     }
@@ -33,8 +31,8 @@ const SignInForm = () => {
     e.preventDefault();
 
     try {
-      const res = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(res);
+      await signInAuthUserWithEmailAndPassword(email, password);
+
       setFormField(defaultFromFields);
     } catch (err) {
       switch (err.code) {
@@ -54,7 +52,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignContainer>
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
 
@@ -77,14 +75,18 @@ const SignInForm = () => {
           required
         />
 
-        <div className="buttons-container">
+        <ButtonContainer>
           <Button>sign in</Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
             google sign in
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
-    </div>
+    </SignContainer>
   );
 };
 
