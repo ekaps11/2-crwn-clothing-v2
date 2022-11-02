@@ -8,9 +8,7 @@ import {
 const CategoryPreview = ({ title, products }) => {
   return (
     <CategoryPreviewContainer>
-      <h2>
-        <Title to={title}>{title}</Title>
-      </h2>
+      <Title to={title}>{title}</Title>
 
       <Preview>
         {products

@@ -12,6 +12,8 @@ export const Title = styled(Link)`
   margin-bottom: 25px;
   cursor: pointer;
   text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
 `;
 
 export const Preview = styled.div`

@@ -1,13 +1,34 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import { getCollection } from '../../utils/firebase/firebase.utils';
+import { createAction } from '../../utils/reducer/reducer.utils';
 
-export const CategoriesContext = createContext({ products: {} });
+export const CategoriesContext = createContext({ categoriesMap: {} });
+
+const INIT_STATE = { categoriesMap: {} };
+
+const categoriesReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case 'SET_CATEGORIES':
+      return {
+        ...state,
+        categoriesMap: payload,
+      };
+
+    default:
+      throw new Error(`Unhandled type ${type} in categoriesReducer`);
+  }
+};
 
 export const CategoriesProvider = ({ children }) => {
-  const [categoriesMap, setCategoriesMap] = useState({});
-  const value = { categoriesMap };
+  const [{ categoriesMap }, dispatch] = useReducer(
+    categoriesReducer,
+    INIT_STATE
+  );
 
-  // useEffect(() => addCollection('categories', SHOP_DATA), []); // should be commented after file has been imported
+  const setCategoriesMap = category =>
+    dispatch(createAction('SET_CATEGORIES', category));
 
   useEffect(() => {
     (async () => {
@@ -16,6 +37,8 @@ export const CategoriesProvider = ({ children }) => {
       setCategoriesMap(categoryMap);
     })();
   }, []);
+
+  const value = { categoriesMap };
 
   return (
     <CategoriesContext.Provider value={value}>
