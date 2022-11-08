@@ -12,7 +12,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middlewares = [process.env.NODE_ENV !== 'development' && logger].filter(
+const middlewares = [process.env.NODE_ENV === 'development' && logger].filter(
   Boolean
 );
 
