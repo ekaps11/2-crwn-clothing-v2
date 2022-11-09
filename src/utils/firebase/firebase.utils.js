@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -20,10 +19,6 @@ import {
   query,
 } from 'firebase/firestore';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyBnb80iBDlY-pQP44tVbjDrQt8X2rzm06Y',
   authDomain: 'crwn-clothing-v2-61977.firebaseapp.com',
@@ -33,8 +28,7 @@ const firebaseConfig = {
   appId: '1:854830301395:web:1b8f57db0c40957660d426',
 };
 
-// SECTION INITIALIZED OR INSTANTIATED
-const app = initializeApp(firebaseConfig); // Initialize Firebase
+const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
@@ -101,9 +95,6 @@ export const onAuthStateChangedListener = callback => {
   onAuthStateChanged(auth, callback);
 };
 
-// SECTION DB TRANSACTION
-
-// only run whenever we need to import to firestore
 export const addCollection = async (collectionKey, objectToAdd) => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
@@ -120,17 +111,18 @@ export const addCollection = async (collectionKey, objectToAdd) => {
   }
 };
 
-// get collection from firestore
 export const getCollection = async () => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
-  const querySnapshot = await getDocs(q);
+  let querySnapshot;
 
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
+  try {
+    querySnapshot = await getDocs(q);
+  } catch (err) {
+    console.log(err.code, err.message);
+  }
+
+  const categoryMap = querySnapshot.docs.map(docSnapshot => docSnapshot.data());
 
   return categoryMap;
 };

@@ -22,24 +22,3 @@ export const CheckoutTotal = styled.span`
   margin-left: auto;
   font-size: 36px;
 `;
-
-//  {
-
-//   .checkout-header {
-
-//     .header-block {
-//       text-transform: capitalize;
-//       width: 23%;
-
-//       &:last-child {
-//         width: 8%;
-//       }
-//     }
-//   }
-
-//   .total {
-//     margin-top: 30px;
-//     margin-left: auto;
-//     font-size: 36px;
-//   }
-// }
