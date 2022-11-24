@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+
 import {
   getAuth,
   GoogleAuthProvider,
@@ -8,6 +9,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
+
 import {
   getFirestore,
   doc,
@@ -64,7 +66,7 @@ export const createUserDocumentFromAuth = async (
     }
   }
 
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -90,10 +92,13 @@ export const signInAuthUserWithEmailAndPassword = async (
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = callback => {
-  if (!callback) return;
-  onAuthStateChanged(auth, callback);
-};
+export const getCurrentUser = () =>
+  new Promise(resolve => {
+    const unsubscribe = onAuthStateChanged(auth, userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    });
+  });
 
 export const addCollection = async (collectionKey, objectToAdd) => {
   const collectionRef = collection(db, collectionKey);
