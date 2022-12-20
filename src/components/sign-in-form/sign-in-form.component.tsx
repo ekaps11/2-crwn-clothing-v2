@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import FormInput from '../form-input/form-input.component';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
-import { SignContainer, ButtonContainer } from './signing-form.styles';
+import { SignContainer, ButtonContainer } from './sign-in-form.styles';
 import {
   googleSignInStart,
   emailSignInStart,

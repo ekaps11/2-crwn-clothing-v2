@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NavigationContainer = styled.div`
-  height: 70px;
+  height: 6rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
 `;
 
 export const Navlinks = styled.div`
@@ -15,6 +14,7 @@ export const Navlinks = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-right: 2.5%;
 `;
 
 export const Navlink = styled(Link)`
@@ -24,6 +24,6 @@ export const Navlink = styled(Link)`
 
 export const Logo = styled(Navlink)`
   height: 100%;
-  width: 70px;
-  padding: 25px;
+  width: 50px;
+  padding: 1.5rem 0.3rem 0 0.3rem;
 `;

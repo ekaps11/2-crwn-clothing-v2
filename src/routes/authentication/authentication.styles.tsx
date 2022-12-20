@@ -2,7 +2,12 @@ import styled from 'styled-components';
 
 export const AuthenticationContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 900px;
-  margin: 30px auto;
+  gap: 10%;
+  justify-content: center;
+
+  @media screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 `;

@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-import { SignContainer } from '../sign-in-form/signing-form.styles';
 import { signUpStart } from '../../store/user/user.action';
+import { SignContainer } from '../sign-in-form/sign-in-form.styles';
 
 const defaultFromFields = {
   displayName: '',
