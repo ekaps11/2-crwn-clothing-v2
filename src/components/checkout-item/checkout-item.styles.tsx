@@ -15,13 +15,16 @@ export const Image = styled.div`
   padding-right: 15px;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 80%;
   }
 `;
 
 export const BaseSpan = styled.span`
   width: 23%;
+
+  span {
+    margin-left: 15%;
+  }
 `;
 
 export const Quantity = styled(BaseSpan)`
@@ -30,6 +33,11 @@ export const Quantity = styled(BaseSpan)`
 
 export const Arrow = styled.div`
   cursor: pointer;
+  margin: 0 0.7rem;
+
+  @media screen and (max-width: 800px) {
+    margin: 0;
+  }
 `;
 
 export const Value = styled.span`
@@ -37,6 +45,10 @@ export const Value = styled.span`
 `;
 
 export const RemoveButton = styled.div`
-  padding-left: 12px;
+  margin-left: 1%;
   cursor: pointer;
+
+  @media screen and (max-width: 800px) {
+    margin: 0 3%;
+  }
 `;

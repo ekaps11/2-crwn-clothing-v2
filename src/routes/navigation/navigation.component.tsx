@@ -31,8 +31,6 @@ const Navigation = () => {
         <Navlinks>
           <Navlink to="shop">SHOP</Navlink>
 
-          <Navlink to="contact">CONTACT</Navlink>
-
           {currentUser ? (
             <Navlink to="auth" onClick={handleSignOut}>
               SIGN OUT

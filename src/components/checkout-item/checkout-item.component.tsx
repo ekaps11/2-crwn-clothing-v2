@@ -42,7 +42,9 @@ const CheckoutItem = memo(({ product }: CheckoutItemProps) => {
         <Arrow onClick={addItem}>&#10095;</Arrow>
       </Quantity>
 
-      <BaseSpan>{price}</BaseSpan>
+      <BaseSpan>
+        <span>{price}</span>
+      </BaseSpan>
 
       <RemoveButton onClick={removeItem}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
